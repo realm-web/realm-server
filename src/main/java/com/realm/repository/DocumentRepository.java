@@ -9,7 +9,7 @@ public interface DocumentRepository extends Neo4jRepository<Document, Long> {
     
     @Query(
             "MATCH (d:Document) WHERE id(d) = $id " +
-            "MATCH (p:Document) WHERE id(p) = $newParentId " +
+            "MATCH (p:Folder) WHERE id(p) = $newParentId " +
             "MERGE (d)-[:BELONGS_TO]->(p) " + 
             "RETURN d")
     public Mono<Void> updateDocumentParent(Long id, Long newParentId);
