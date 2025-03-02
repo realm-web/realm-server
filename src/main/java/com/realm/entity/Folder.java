@@ -17,8 +17,7 @@ public class Folder {
 
     @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.INCOMING)
     private List<Folder> folders;
-    @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
-    private Folder parent;
+
 
     public Long getId() {
         return id;
@@ -50,13 +49,5 @@ public class Folder {
 
     public void setFolders(List<Folder> folders) {
         this.folders = folders;
-    }
-
-    public Folder getParent() {
-        return parent;
-    }
-
-    public void setParent(Folder parent) {
-        this.parent = parent;
     }
 }
