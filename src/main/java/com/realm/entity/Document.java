@@ -13,8 +13,6 @@ public class Document {
     private String name;
     private String content;
 
-    @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
-    private Folder folder;
 
     public Document(Long id, String name, String content) {
         this.id = id;
@@ -45,14 +43,7 @@ public class Document {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public Folder getFolder() {
-        return folder;
-    }
-
-    public void setFolder(Folder folder) {
-        this.folder = folder;
-    }
+    
 
 }
 
