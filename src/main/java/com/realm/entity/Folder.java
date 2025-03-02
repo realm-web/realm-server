@@ -5,6 +5,8 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Node
 public class Folder {
@@ -18,6 +20,10 @@ public class Folder {
     @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.INCOMING)
     private List<Folder> folders;
 
+    public Folder(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -47,7 +53,12 @@ public class Folder {
         return folders;
     }
 
-    public void setFolders(List<Folder> folders) {
-        this.folders = folders;
+    public boolean containsFolder(String name) {
+        return folders.stream()
+                .anyMatch(folder -> folder.getName() != null && folder.getName().equals(name));
+    }
+    public boolean containsDocument(String name) {
+        return documents.stream()
+                .anyMatch(document -> document.getName() != null && document.getName().equals(name));
     }
 }
