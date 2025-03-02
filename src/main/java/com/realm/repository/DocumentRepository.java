@@ -1,7 +1,8 @@
 package com.realm.repository;
 
-import com.realm.entity.Document;
-import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.neo4j.repository.ReactiveNeo4jRepository;
 
-public interface DocumentRepository extends Neo4jRepository<Document, Long> {
+import com.realm.entity.Document;
+
+public interface DocumentRepository extends ReactiveNeo4jRepository<Document, Long> {
 }
