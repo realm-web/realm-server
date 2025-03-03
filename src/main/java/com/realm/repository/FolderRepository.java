@@ -13,5 +13,6 @@ public interface FolderRepository extends Neo4jRepository<Folder, Long> {
     )
     public Mono<Void> updateFolderParent(Long id, Long newParentId);
 
+    
     public Mono<Void> deleteFolderCascade(Long id);
 }

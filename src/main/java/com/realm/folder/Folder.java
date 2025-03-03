@@ -1,4 +1,5 @@
-package com.realm.entity;
+package com.realm.folder;
+import com.realm.document.Document;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -17,8 +18,11 @@ public class Folder {
 
     @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.INCOMING)
     private List<Folder> folders;
-    @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
-    private List<Folder> parent;
+
+    public Folder(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -48,15 +52,12 @@ public class Folder {
         return folders;
     }
 
-    public void setFolders(List<Folder> folders) {
-        this.folders = folders;
+    public boolean containsFolder(String name) {
+        return folders.stream()
+                .anyMatch(folder -> folder.getName() != null && folder.getName().equals(name));
     }
-
-    public List<Folder> getParent() {
-        return parent;
-    }
-
-    public void setParent(List<Folder> parent) {
-        this.parent = parent;
+    public boolean containsDocument(String name) {
+        return documents.stream()
+                .anyMatch(document -> document.getName() != null && document.getName().equals(name));
     }
 }

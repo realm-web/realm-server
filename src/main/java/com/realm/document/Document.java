@@ -1,8 +1,7 @@
-package com.realm.entity;
+package com.realm.document;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
 
 
 @Node
@@ -13,8 +12,12 @@ public class Document {
     private String name;
     private String content;
 
-    @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
-    private Folder folder;
+
+    public Document(Long id, String name, String content) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+    }
 
     public Long getId() {
         return id;
@@ -40,12 +43,6 @@ public class Document {
         this.content = content;
     }
 
-    public Folder getFolder() {
-        return folder;
-    }
 
-    public void setFolder(Folder folder) {
-        this.folder = folder;
-    }
 }
 
