@@ -14,7 +14,11 @@ public interface FolderRepository extends ReactiveNeo4jRepository<Folder, Long> 
     Mono<Void> updateFolderParent(@Param("id") Long id, @Param("newParentId") Long newParentId);
 
     // Delete a folder and cascade delete its relationships
-    @Query("MATCH (f:Folder) WHERE id(f) = $id " +
+    @Query("MATCH (f:Folder) WHERE f.id = $id " +
+            "OPTIONAL MATCH (f)-[:BELONGS_TO*]->(sub)" + 
+            "WITH COLLECT(sub) AS children" + 
+            "UNWIND children AS folder" + 
+            "DETACH DELETE FOLDER" + 
             "OPTIONAL MATCH (f)-[r:BELONGS_TO]->() " +
             "DELETE f, r")
     Mono<Void> deleteFolderCascade(@Param("id") Long id);
