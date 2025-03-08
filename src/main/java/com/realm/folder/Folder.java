@@ -68,4 +68,5 @@ public class Folder {
     public boolean containsDocument(String name) {
         return documents.stream().anyMatch(document -> document.getName().equals(name));
     }
+
 }
